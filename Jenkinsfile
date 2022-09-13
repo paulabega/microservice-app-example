@@ -12,7 +12,7 @@ pipeline {
                 dir("users-api"){
                     script {
                         def UsersAPI = docker.build('paulabetancurg/users-api')
-                        docker.withRegistry('https://registry.hub.docker.com', '') {
+                        docker.withRegistry('https://registry.hub.docker.com', 'DockerHubCredential') {
                             UsersAPI.push('latest')
                         }
                     }
