@@ -11,9 +11,24 @@ pipeline {
             steps {
                 dir("users-api"){
                     script {
-                        def UsersAPI = docker.build('paulabetancurg/users-api')
+                        def usersAPI = docker.build('paulabetancurg/users-api')
                         docker.withRegistry('https://registry.hub.docker.com', 'DockerHubCredential') {
-                            UsersAPI.push('latest')
+                            usersAPI.push('latest')
+                        }
+                    }
+
+                }
+
+            }
+        }
+
+        stage('Build and push auth-api') { 
+            steps {
+                dir("auth-api"){
+                    script {
+                        def authAPI = docker.build('paulabetancurg/auth-api')
+                        docker.withRegistry('https://registry.hub.docker.com', 'DockerHubCredential') {
+                            authAPI.push('latest')
                         }
                     }
 
