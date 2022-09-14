@@ -37,5 +37,35 @@ pipeline {
             }
         }
 
+        stage('Build and push todos-api') { 
+            steps {
+                dir("todos-api"){
+                    script {
+                        def todosAPI = docker.build('paulabetancurg/todos-api')
+                        docker.withRegistry('https://registry.hub.docker.com', 'DockerHubCredential') {
+                            todosAPI.push('latest')
+                        }
+                    }
+
+                }
+
+            }
+        }
+
+        stage('Build and push log-message-processor') { 
+            steps {
+                dir("log-message-processor"){
+                    script {
+                        def logMessageProcessor = docker.build('paulabetancurg/log-message-processor')
+                        docker.withRegistry('https://registry.hub.docker.com', 'DockerHubCredential') {
+                            logMessageProcessor.push('latest')
+                        }
+                    }
+
+                }
+
+            }
+        }
+
     }
 }
