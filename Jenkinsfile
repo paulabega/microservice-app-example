@@ -70,7 +70,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sshagent(['SSHKey']) {
-                    sh 'ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ubuntu@10.1.1.33 ansible-playbook docker.yaml -i inventory.yaml -v'
+                    sh 'ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ubuntu@10.1.1.33 ansible-playbook ansible/docker.yaml -i ansible/inventory.yaml -v'
                 }
             }
         }
