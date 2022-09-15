@@ -70,7 +70,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sshagent(['SSHKey']) {
-                    sh 'ssh ubuntu@3.101.132.170 ansible-playbook docker.yaml -i inventory.yaml -v'
+                    sh 'ssh ubuntu@10.1.1.33 ansible-playbook docker.yaml -i inventory.yaml -v'
                 }
             }
         }
